@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { ChromeSwitch } from "@/components/chrome-switch";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { getProgressState } from "@/app/actions/progress";
@@ -55,6 +56,7 @@ export default async function RootLayout({
             </ChromeSwitch>
           </PostHogProvider>
         </ClerkProvider>
+        <Analytics />
       </body>
     </html>
   );
