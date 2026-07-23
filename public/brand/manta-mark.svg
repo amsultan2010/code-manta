@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-hidden="true">
+  <!-- CodeManta mark — simple, crisp, no fringe -->
+  <g transform="translate(256 255) rotate(-18) scale(0.9)">
+    <!-- foam sticker outline -->
+    <path
+      fill="#F4FAF7"
+      d="M0 -36
+         L205 -90
+         C232 -98 255 -74 246 -48
+         L192 58
+         C170 105 90 148 32 158
+         L18 215
+         C10 238 -10 238 -18 215
+         L-32 158
+         C-90 148 -170 105 -192 58
+         L-246 -48
+         C-255 -74 -232 -98 -205 -90
+         Z"
+    />
+    <!-- teal body -->
+    <path
+      fill="#186058"
+      d="M0 -24
+         L192 -78
+         C214 -84 230 -66 224 -46
+         L174 52
+         C156 92 82 130 28 138
+         L16 188
+         C10 204 -10 204 -16 188
+         L-28 138
+         C-82 130 -156 92 -174 52
+         L-224 -46
+         C-230 -66 -214 -84 -192 -78
+         Z"
+    />
+    <!-- belly -->
+    <ellipse cx="0" cy="72" rx="78" ry="48" fill="#F4FAF7"/>
+    <!-- coral tips -->
+    <path fill="#FF6A4D" d="M205 -90 C235 -108 262 -70 246 -42 C232 -58 216 -76 205 -90 Z"/>
+    <path fill="#FF6A4D" d="M-205 -90 C-235 -108 -262 -70 -246 -42 C-232 -58 -216 -76 -205 -90 Z"/>
+    <path fill="#FF6A4D" d="M18 215 C26 235 4 248 -6 232 C4 224 12 218 18 215 Z"/>
+    <path fill="#FF6A4D" d="M-18 215 C-26 235 -4 248 6 232 C-4 224 -12 218 -18 215 Z"/>
+    <!-- eyes -->
+    <circle cx="-26" cy="58" r="7" fill="#FF6A4D"/>
+    <circle cx="26" cy="58" r="7" fill="#FF6A4D"/>
+    <circle cx="-24" cy="56" r="2.2" fill="#FFF8F4"/>
+    <circle cx="28" cy="56" r="2.2" fill="#FFF8F4"/>
+    <!-- tail -->
+    <path d="M0 -36 C-4 -105 0 -165 2 -215" stroke="#F4FAF7" stroke-width="13" stroke-linecap="round"/>
+    <path d="M0 -36 C-4 -105 0 -165 2 -215" stroke="#186058" stroke-width="8" stroke-linecap="round"/>
+    <path d="M0 -36 C20 -95 36 -150 40 -200" stroke="#F4FAF7" stroke-width="8" stroke-linecap="round"/>
+    <path d="M0 -36 C20 -95 36 -150 40 -200" stroke="#14524B" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="2" cy="-215" r="5" fill="#FF6A4D"/>
+    <circle cx="40" cy="-200" r="3.5" fill="#FF6A4D"/>
+  </g>
+</svg>
