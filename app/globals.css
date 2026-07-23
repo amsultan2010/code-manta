@@ -118,6 +118,7 @@ html[data-landing-phase="ink"] .site-header .btn-solid {
   flex-shrink: 0;
   object-fit: contain;
   display: block;
+  border-radius: 999px;
 }
 
 .site-nav {
@@ -251,6 +252,7 @@ html[data-landing-phase="ink"] .stat-pill {
   height: 4.5rem;
   object-fit: contain;
   display: block;
+  border-radius: 999px;
 }
 
 .boot-loader__label {
@@ -846,22 +848,23 @@ html:not([data-landing-phase="ink"]) .hero-diagram__branch.tone-foam {
   z-index: 3;
   display: grid;
   place-items: center;
-  width: 6.5rem;
-  height: 6.5rem;
-  padding: 0.85rem;
+  /* Circular badge is self-framed — no padded double ring */
+  width: 5.5rem;
+  height: 5.5rem;
+  padding: 0;
   border-radius: 999px;
-  border: 2px solid color-mix(in oklab, var(--sun) 55%, transparent);
-  background: color-mix(in oklab, var(--ink) 88%, black);
+  border: none;
+  background: transparent;
   box-shadow:
-    0 0 0 10px color-mix(in oklab, var(--ink) 22%, transparent),
+    0 0 0 8px color-mix(in oklab, var(--ink) 18%, transparent),
     0 14px 36px color-mix(in oklab, black 28%, transparent);
 }
 
 html:not([data-landing-phase="ink"]) .hero-diagram__root {
-  background: color-mix(in oklab, var(--foam) 92%, white);
-  border-color: color-mix(in oklab, var(--sea) 45%, transparent);
+  background: transparent;
+  border: none;
   box-shadow:
-    0 0 0 10px color-mix(in oklab, var(--sea) 10%, transparent),
+    0 0 0 8px color-mix(in oklab, var(--sea) 12%, transparent),
     0 14px 32px color-mix(in oklab, var(--ink) 12%, transparent);
 }
 
@@ -870,6 +873,7 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   height: 100%;
   display: block;
   object-fit: contain;
+  border-radius: 999px;
 }
 
 .hero-diagram__node {
@@ -1580,9 +1584,9 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   }
 
   .hero-diagram__root {
-    width: 5.25rem;
-    height: 5.25rem;
-    padding: 0.65rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding: 0;
   }
 
   .hero-diagram__node {
