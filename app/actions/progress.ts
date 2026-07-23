@@ -3,10 +3,10 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { getLesson } from "@/lib/curriculum";
 import {
-  getSupabaseAdmin,
+  getSupabaseAuthed,
   type LessonCompletion,
   type Profile,
-} from "@/lib/supabase/admin";
+} from "@/lib/supabase/server";
 
 function todayUTC() {
   return new Date().toISOString().slice(0, 10);
@@ -30,33 +30,35 @@ function emptyProfile(userId: string, displayName?: string | null): Profile {
 }
 
 export async function ensureProfile(): Promise<Profile | null> {
-  const { userId } = await auth();
-  if (!userId) return null;
+  const session = await getSupabaseAuthed();
+  if (!session) return null;
 
-  const db = getSupabaseAdmin();
-  if (!db) return emptyProfile(userId);
-
+  const { client, userId } = session;
   const user = await currentUser();
   const displayName =
     user?.fullName || user?.username || user?.primaryEmailAddress?.emailAddress || null;
 
-  const { data: existing } = await db
+  const { data: existing, error: readError } = await client
     .from("profiles")
     .select("*")
     .eq("id", userId)
     .maybeSingle();
 
+  if (readError) {
+    console.error("ensureProfile read", readError.message, session.mode);
+  }
+
   if (existing) return existing as Profile;
 
   const profile = emptyProfile(userId, displayName);
-  const { data, error } = await db
+  const { data, error } = await client
     .from("profiles")
     .insert(profile)
     .select("*")
     .single();
 
   if (error) {
-    console.error("ensureProfile", error.message);
+    console.error("ensureProfile insert", error.message, session.mode);
     return profile;
   }
 
@@ -69,17 +71,21 @@ export async function getProgressState() {
     return { profile: null as Profile | null, completions: [] as LessonCompletion[] };
   }
 
-  const db = getSupabaseAdmin();
+  const session = await getSupabaseAuthed();
   const profile = await ensureProfile();
 
-  if (!db) {
+  if (!session) {
     return { profile, completions: [] as LessonCompletion[] };
   }
 
-  const { data: completions } = await db
+  const { data: completions, error } = await session.client
     .from("lesson_completions")
     .select("lesson_id, course_id, topic_id, xp_awarded, completed_at")
     .eq("user_id", userId);
+
+  if (error) {
+    console.error("getProgressState", error.message, session.mode);
+  }
 
   return {
     profile,
@@ -92,22 +98,16 @@ export async function completeLessonAction(input: {
   topicId: string;
   lessonId: string;
 }) {
-  const { userId } = await auth();
-  if (!userId) {
+  const session = await getSupabaseAuthed();
+  if (!session) {
     return { ok: false as const, error: "Sign in to save progress." };
   }
+
+  const { client, userId } = session;
 
   const lesson = getLesson(input.courseId, input.topicId, input.lessonId);
   if (!lesson) {
     return { ok: false as const, error: "Lesson not found." };
-  }
-
-  const db = getSupabaseAdmin();
-  if (!db) {
-    return {
-      ok: false as const,
-      error: "Progress database is not configured yet (missing service role key).",
-    };
   }
 
   const profile = await ensureProfile();
@@ -115,12 +115,17 @@ export async function completeLessonAction(input: {
     return { ok: false as const, error: "Could not load profile." };
   }
 
-  const { data: existing } = await db
+  // Hard scope: never trust a client-supplied user id
+  const { data: existing, error: existingError } = await client
     .from("lesson_completions")
     .select("id")
     .eq("user_id", userId)
     .eq("lesson_id", input.lessonId)
     .maybeSingle();
+
+  if (existingError) {
+    return { ok: false as const, error: existingError.message };
+  }
 
   if (existing) {
     return {
@@ -135,7 +140,7 @@ export async function completeLessonAction(input: {
   const yesterday = yesterdayUTC();
   let streak = profile.streak_count;
   if (profile.last_activity_date === today) {
-    // same day, streak unchanged
+    // same day
   } else if (profile.last_activity_date === yesterday) {
     streak += 1;
   } else {
@@ -144,7 +149,7 @@ export async function completeLessonAction(input: {
   const longest = Math.max(profile.longest_streak, streak);
   const xp = profile.xp + lesson.xp;
 
-  const { error: completionError } = await db.from("lesson_completions").insert({
+  const { error: completionError } = await client.from("lesson_completions").insert({
     user_id: userId,
     course_id: input.courseId,
     topic_id: input.topicId,
@@ -156,7 +161,7 @@ export async function completeLessonAction(input: {
     return { ok: false as const, error: completionError.message };
   }
 
-  const { data: updated, error: profileError } = await db
+  const { data: updated, error: profileError } = await client
     .from("profiles")
     .update({
       xp,

@@ -22,12 +22,12 @@ export default async function LessonPage({
   return (
     <main className="page">
       <p className="page-kicker">
-        <Link href={`/courses/${courseId}`}>{course.name}</Link> / {topic.title}
+        <Link href="/dashboard">{course.name}</Link> / {topic.title}
       </p>
       <h1 className="page-title">{lesson.title}</h1>
       <p className="page-lede">
-        {lesson.durationMin} min · {lesson.xp} XP
-        {done ? " · completed" : ""}
+        {lesson.durationMin} min, {lesson.xp} XP
+        {done ? ", completed" : ""}
       </p>
 
       <div className="lesson-player">

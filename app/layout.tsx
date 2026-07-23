@@ -1,11 +1,10 @@
-import {
-  ClerkProvider,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
-import { SiteHeader } from "@/components/site-header";
+import { ChromeSwitch } from "@/components/chrome-switch";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { getProgressState } from "@/app/actions/progress";
+import { clerkAppearance } from "@/lib/clerk-appearance";
 import "./globals.css";
 
 const display = Fraunces({
@@ -29,7 +28,11 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "CodeManta",
   description:
-    "Free beginner courses for shipping with Cursor and Claude Code. Bronze, Silver, Gold.",
+    "Free nonprofit courses for shipping with AI coding tools. Learn Cursor, Codex, Claude Code, and the path from first deploy to real users.",
+  icons: {
+    icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png" }],
+  },
 };
 
 export default async function RootLayout({
@@ -45,10 +48,11 @@ export default async function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable} h-full`}
     >
       <body className="site-shell">
-        <ClerkProvider>
+        <ClerkProvider appearance={clerkAppearance}>
           <PostHogProvider>
-            <SiteHeader xp={profile?.xp ?? 0} streak={profile?.streak_count ?? 0} />
-            {children}
+            <ChromeSwitch xp={profile?.xp ?? 0} streak={profile?.streak_count ?? 0}>
+              {children}
+            </ChromeSwitch>
           </PostHogProvider>
         </ClerkProvider>
       </body>

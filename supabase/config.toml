@@ -1,0 +1,6 @@
+# Local/self-host reference for Clerk ↔ Supabase
+# Remote project: also add this domain in Dashboard → Auth → Third-party
+
+[auth.third_party.clerk]
+enabled = true
+domain = "perfect-shrew-33.clerk.accounts.dev"
