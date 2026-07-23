@@ -66,31 +66,44 @@ export async function ensureProfile(): Promise<Profile | null> {
 }
 
 export async function getProgressState() {
-  const { userId } = await auth();
-  if (!userId) {
-    return { profile: null as Profile | null, completions: [] as LessonCompletion[] };
-  }
-
-  const session = await getSupabaseAuthed();
-  const profile = await ensureProfile();
-
-  if (!session) {
-    return { profile, completions: [] as LessonCompletion[] };
-  }
-
-  const { data: completions, error } = await session.client
-    .from("lesson_completions")
-    .select("lesson_id, course_id, topic_id, xp_awarded, completed_at")
-    .eq("user_id", userId);
-
-  if (error) {
-    console.error("getProgressState", error.message, session.mode);
-  }
-
-  return {
-    profile,
-    completions: (completions ?? []) as LessonCompletion[],
+  const empty = {
+    profile: null as Profile | null,
+    completions: [] as LessonCompletion[],
   };
+
+  // Avoid crashing the marketing shell when Clerk/Supabase env is absent.
+  if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || !process.env.CLERK_SECRET_KEY) {
+    return empty;
+  }
+
+  try {
+    const { userId } = await auth();
+    if (!userId) return empty;
+
+    const session = await getSupabaseAuthed();
+    const profile = await ensureProfile();
+
+    if (!session) {
+      return { profile, completions: [] as LessonCompletion[] };
+    }
+
+    const { data: completions, error } = await session.client
+      .from("lesson_completions")
+      .select("lesson_id, course_id, topic_id, xp_awarded, completed_at")
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("getProgressState", error.message, session.mode);
+    }
+
+    return {
+      profile,
+      completions: (completions ?? []) as LessonCompletion[],
+    };
+  } catch (error) {
+    console.error("getProgressState failed", error);
+    return empty;
+  }
 }
 
 export async function completeLessonAction(input: {
