@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 const nav = [
-  { href: "/courses", label: "Courses", match: "courses" },
-  { href: "/progress", label: "Progress", match: "progress" },
-  { href: "/dashboard", label: "Dashboard", match: "dashboard" },
-  { href: "/settings", label: "Settings", match: "settings" },
+  { href: "/dashboard", label: "Dashboard", match: "dashboard", hint: "Overview" },
+  { href: "/courses", label: "Courses", match: "courses", hint: "Syllabus" },
+  { href: "/progress", label: "Progress", match: "progress", hint: "XP & streak" },
+  { href: "/settings", label: "Settings", match: "settings", hint: "Account" },
 ] as const;
 
 function isNavActive(pathname: string, match: (typeof nav)[number]["match"]) {
@@ -110,8 +110,10 @@ export function PlatformShell({
                 key={item.href}
                 href={item.href}
                 className={isNavActive(pathname, item.match) ? "is-active" : undefined}
+                aria-current={isNavActive(pathname, item.match) ? "page" : undefined}
               >
-                {item.label}
+                <span className="platform-nav__label">{item.label}</span>
+                <span className="platform-nav__hint">{item.hint}</span>
               </Link>
             ))}
           </nav>

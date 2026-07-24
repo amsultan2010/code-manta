@@ -24,7 +24,6 @@ function formatDate(iso: string) {
   return d.toLocaleDateString(undefined, {
     month: "short",
     day: "numeric",
-    year: "numeric",
   });
 }
 
@@ -37,13 +36,11 @@ export function LearnerDashboard({
   displayName,
 }: Props) {
   const bronze = getCourse("bronze");
-  const silver = getCourse("silver");
-  const gold = getCourse("gold");
-  const stats = bronzeStats();
   const done = new Set(completions.map((c) => c.lesson_id));
   const level = xpToLevel(xp);
   const firstName = displayName?.split(" ")[0];
   const lessons = listBronzeLessons();
+  const stats = bronzeStats();
 
   const flat = lessons.map((item) => ({
     topicId: item.topicId,
@@ -60,12 +57,16 @@ export function LearnerDashboard({
     .filter((item) => !done.has(item.lessonId))
     .reduce((sum, item) => sum + item.lesson.durationMin, 0);
 
+  const nextTopic =
+    bronze?.topics.find((topic) => topic.lessons.some((l) => !done.has(l.id))) ??
+    bronze?.topics[bronze.topics.length - 1];
+
   const recent = [...completions]
     .sort(
       (a, b) =>
         new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime(),
     )
-    .slice(0, 4)
+    .slice(0, 3)
     .map((c) => {
       const match = lessons.find((l) => l.lessonId === c.lesson_id);
       return {
@@ -87,6 +88,7 @@ export function LearnerDashboard({
           topic.lessons.length > 0
             ? Math.round((topicDone / topic.lessons.length) * 100)
             : 0,
+        isCurrent: topic.id === nextTopic?.id,
       };
     }) ?? [];
 
@@ -96,42 +98,37 @@ export function LearnerDashboard({
         <div className="dash-hero__copy">
           <p className="dash-kicker">Dashboard</p>
           <h1 className="dash-title">
-            {firstName ? `Hi, ${firstName}` : "Your dashboard"}
+            {firstName ? `Hi, ${firstName}` : "Welcome back"}
           </h1>
           <p className="dash-lede">
             {finished === 0
-              ? "Start Bronze, earn XP, and open a streak."
+              ? "One clear next step: start Bronze."
               : finished === total
-                ? "Bronze is complete. Keep your streak while Silver opens."
-                : `${finished} of ${total} lessons done · about ${minutesLeft} min left.`}
+                ? "Bronze is done. Keep the streak warm."
+                : `${finished}/${total} lessons · ~${minutesLeft} min left in Bronze.`}
           </p>
-        </div>
-        <div className="dash-hero__actions">
-          <Link href="/courses" className="btn btn-ghost">
-            Courses
-          </Link>
-          {resume ? (
-            <Link href={resume.href} className="btn btn-solid">
-              {resume.label}
-            </Link>
-          ) : null}
         </div>
       </header>
 
       {resume ? (
         <Link href={resume.href} className="dash-continue">
           <div className="dash-continue__copy">
-            <span className="dash-continue__eyebrow">Up next</span>
+            <span className="dash-continue__eyebrow">
+              {finished === 0 ? "Start here" : "Continue learning"}
+            </span>
             <strong className="dash-continue__title">{resume.title}</strong>
-            <span className="dash-continue__meta">Bronze · {resume.label}</span>
+            <span className="dash-continue__meta">
+              Bronze
+              {nextTopic ? ` · ${nextTopic.title}` : ""} · {resume.label}
+            </span>
           </div>
-          <span className="dash-continue__action" aria-hidden>
-            Open
+          <span className="dash-continue__action">
+            {finished === 0 ? "Start" : "Continue"}
           </span>
         </Link>
       ) : null}
 
-      <section className="dash-strip" aria-label="XP and streaks">
+      <section className="dash-strip dash-strip--compact" aria-label="Your stats">
         <div className="dash-strip__level">
           <div className="dash-strip__level-top">
             <span>{level.label}</span>
@@ -154,7 +151,7 @@ export function LearnerDashboard({
           <div>
             <dt>XP</dt>
             <dd>{xp}</dd>
-            <p className="dash-strip__hint">of {stats.totalXp} Bronze</p>
+            <p className="dash-strip__hint">of {stats.totalXp}</p>
           </div>
           <div>
             <dt>Streak</dt>
@@ -166,10 +163,10 @@ export function LearnerDashboard({
           </div>
           <div>
             <dt>Bronze</dt>
-            <dd>
+            <dd>{progressPct}%</dd>
+            <p className="dash-strip__hint">
               {finished}/{total}
-            </dd>
-            <p className="dash-strip__hint">{progressPct}%</p>
+            </p>
           </div>
         </dl>
       </section>
@@ -177,14 +174,22 @@ export function LearnerDashboard({
       <section className="dash-panels" aria-label="Overview">
         <article className="dash-panel">
           <div className="dash-panel__head">
-            <h2>Path at a glance</h2>
-            <Link href="/courses">Open courses</Link>
+            <h2>Where you are</h2>
+            <Link href="/courses">Full syllabus</Link>
           </div>
           <ul className="dash-glance">
             {topicGlance.map((topic) => (
-              <li key={topic.id}>
+              <li
+                key={topic.id}
+                className={topic.isCurrent ? "is-current" : undefined}
+              >
                 <div className="dash-glance__row">
-                  <span>{topic.title}</span>
+                  <span>
+                    {topic.isCurrent ? (
+                      <em className="dash-glance__now">Now</em>
+                    ) : null}
+                    {topic.title}
+                  </span>
                   <span>
                     {topic.done}/{topic.total}
                   </span>
@@ -205,12 +210,12 @@ export function LearnerDashboard({
 
         <article className="dash-panel">
           <div className="dash-panel__head">
-            <h2>Recent activity</h2>
-            <Link href="/progress">Full progress</Link>
+            <h2>Recent</h2>
+            <Link href="/progress">All progress</Link>
           </div>
           {recent.length === 0 ? (
             <p className="dash-empty">
-              No lessons completed yet. Finish one to start your streak.
+              Nothing completed yet. Hit Continue above to start.
             </p>
           ) : (
             <ul className="dash-activity">
@@ -231,46 +236,25 @@ export function LearnerDashboard({
           )}
           {lastActivityDate ? (
             <p className="dash-panel__note">
-              Last activity: {formatDate(lastActivityDate)}
+              Last active {formatDate(lastActivityDate)}
             </p>
           ) : null}
         </article>
       </section>
 
-      <section className="dash-soon" aria-label="Course catalog">
-        <div className="dash-panel__head">
-          <h2>Your courses</h2>
-          <Link href="/courses">Browse all</Link>
-        </div>
-        <div className="dash-soon__grid dash-course-cards">
-          {bronze ? (
-            <article className="dash-soon__card is-live">
-              <div className="dash-soon__top">
-                <h3>Bronze</h3>
-                <span className="level-tag">Live</span>
-              </div>
-              <p>{bronze.tagline}</p>
-              <p className="dash-course-cards__meta">
-                {finished}/{total} lessons · {progressPct}%
-              </p>
-              <Link href="/courses" className="btn btn-solid">
-                {finished === 0 ? "Start Bronze" : "Continue Bronze"}
-              </Link>
-            </article>
-          ) : null}
-          {[silver, gold].filter(Boolean).map((course) =>
-            course ? (
-              <article key={course.id} className="dash-soon__card">
-                <div className="dash-soon__top">
-                  <h3>{course.name}</h3>
-                  <span className="level-tag">Soon</span>
-                </div>
-                <p>{course.tagline}</p>
-                <p className="dash-course-cards__meta">Opens after Bronze</p>
-              </article>
-            ) : null,
-          )}
-        </div>
+      <section className="dash-quick" aria-label="Shortcuts">
+        <Link href="/courses" className="dash-quick__link">
+          <strong>Courses</strong>
+          <span>Browse the Bronze syllabus</span>
+        </Link>
+        <Link href="/progress" className="dash-quick__link">
+          <strong>Progress</strong>
+          <span>XP, streaks, history</span>
+        </Link>
+        <Link href="/settings" className="dash-quick__link">
+          <strong>Settings</strong>
+          <span>Profile and security</span>
+        </Link>
       </section>
     </div>
   );

@@ -1801,10 +1801,7 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
 /* Platform learner shell */
 .platform {
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse 80% 50% at 100% 0%, color-mix(in oklab, var(--sun) 18%, transparent), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 0% 100%, color-mix(in oklab, var(--sea) 12%, transparent), transparent 50%),
-    var(--foam);
+  background: var(--foam);
   color: var(--ink);
 }
 
@@ -1812,15 +1809,15 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   position: sticky;
   top: 0;
   z-index: 30;
-  background: color-mix(in oklab, var(--foam) 92%, white);
+  background: color-mix(in oklab, var(--foam) 94%, white);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
 }
 
 .platform-top__inner {
-  width: min(1400px, calc(100% - (var(--gutter) * 2)));
-  margin: 0 auto;
-  padding: 0.65rem 0;
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1844,39 +1841,40 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
 }
 
 .platform-body {
-  width: min(1400px, calc(100% - (var(--gutter) * 2)));
-  margin: 0 auto;
-  padding: 1rem 0 2.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   display: grid;
-  gap: 1rem;
+  gap: 0;
 }
 
 .platform-side {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.75rem;
   align-content: start;
+  padding: 0.85rem 1rem 1rem;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in oklab, white 70%, var(--foam));
 }
 
 .platform-profile {
   display: none;
-  gap: 0.75rem;
+  gap: 0.7rem;
   align-items: center;
-  padding: 0.85rem 1rem;
-  border-radius: 1rem;
-  border: 1.5px solid var(--line);
-  background: white;
+  padding: 0.15rem 0.25rem 0.65rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
 }
 
 .platform-avatar {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 999px;
   display: grid;
   place-items: center;
   background: var(--sea);
   color: var(--foam);
   font-family: var(--font-display), serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   flex-shrink: 0;
 }
 
@@ -1895,50 +1893,55 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
 }
 
 .platform-profile__edit {
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--sea);
 }
 
 .platform-nav {
-  display: flex;
-  gap: 0.4rem;
-  overflow-x: auto;
-  padding-bottom: 0.15rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.platform-nav::-webkit-scrollbar {
-  display: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.25rem;
 }
 
 .platform-nav a {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  padding: 0.55rem 0.9rem;
-  border-radius: 999px;
-  border: 1.5px solid var(--line);
-  background: white;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.55rem 0.45rem;
+  border-radius: 0.7rem;
+  border: 0;
+  background: transparent;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.2;
-  transition: background 160ms var(--ease-out), border-color 160ms var(--ease-out);
+  text-align: center;
+  transition: background 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+
+.platform-nav__label {
+  display: block;
+}
+
+.platform-nav__hint {
+  display: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.62;
 }
 
 .platform-nav a:hover,
 .platform-nav a:focus-visible {
-  border-color: color-mix(in oklab, var(--sea) 45%, transparent);
+  background: color-mix(in oklab, var(--sea) 10%, white);
 }
 
 .platform-nav a.is-active {
-  border-color: color-mix(in oklab, var(--sea) 55%, transparent);
-  background: color-mix(in oklab, var(--sea) 14%, white);
+  background: color-mix(in oklab, var(--sea) 16%, white);
   color: var(--ink-2);
+  box-shadow: inset 0 -2px 0 var(--coral);
 }
 
 .platform-main {
   min-width: 0;
+  padding: 1rem 1rem 2.5rem;
 }
 
 .dash {
@@ -2062,6 +2065,55 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   justify-content: space-between;
   gap: 0.75rem;
   font-size: 1.05rem;
+}
+
+.dash-glance__now {
+  display: inline-block;
+  margin-right: 0.4rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: var(--coral-soft);
+  color: var(--coral);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.dash-glance li.is-current .dash-glance__bar > span {
+  background: linear-gradient(90deg, var(--coral), var(--sun));
+}
+
+.dash-quick {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.dash-quick__link {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  border: 1.5px solid var(--line);
+  background: white;
+  transition: border-color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.dash-quick__link:hover,
+.dash-quick__link:focus-visible {
+  border-color: color-mix(in oklab, var(--sea) 45%, transparent);
+  transform: translateY(-1px);
+}
+
+.dash-quick__link strong {
+  font-size: 1.15rem;
+}
+
+.dash-quick__link span {
+  font-size: 1.05rem;
+  color: color-mix(in oklab, var(--ink) 68%, transparent);
 }
 
 .dash-glance__row span:last-child {
@@ -2598,28 +2650,63 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   .dash-course-cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .dash-quick {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 960px) {
+  .platform-top__inner {
+    padding-inline: 1.25rem 1.5rem;
+  }
+
   .platform-body {
-    grid-template-columns: 12.5rem minmax(0, 1fr);
-    gap: 1.5rem;
-    padding-top: 1.25rem;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    min-height: calc(100vh - 4.25rem);
+  }
+
+  .platform-side {
+    position: sticky;
+    top: 4.1rem;
+    align-self: start;
+    height: calc(100vh - 4.1rem);
+    padding: 1.15rem 0.85rem 1.5rem 1rem;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+    background: color-mix(in oklab, white 82%, var(--foam));
   }
 
   .platform-profile {
     display: flex;
+    margin: 0 0.35rem 0.35rem;
   }
 
   .platform-nav {
-    flex-direction: column;
-    overflow: visible;
-    padding-bottom: 0;
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
   }
 
   .platform-nav a {
-    border-radius: 0.85rem;
-    width: 100%;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    text-align: left;
+    padding: 0.7rem 0.85rem;
+    border-radius: 0.75rem;
+    box-shadow: none;
+  }
+
+  .platform-nav a.is-active {
+    box-shadow: inset 3px 0 0 var(--coral);
+  }
+
+  .platform-nav__hint {
+    display: block;
+  }
+
+  .platform-main {
+    padding: 1.35rem 1.5rem 2.75rem;
+    max-width: 58rem;
   }
 
   .dash {
@@ -2666,6 +2753,20 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
 
   .platform-top__inner {
     gap: 0.5rem;
+    padding-inline: 0.75rem;
+  }
+
+  .platform-side {
+    padding-inline: 0.75rem;
+  }
+
+  .platform-main {
+    padding-inline: 0.75rem;
+  }
+
+  .platform-nav a {
+    font-size: 0.92rem;
+    padding: 0.5rem 0.2rem;
   }
 
   .brand-mark--compact .brand-mark__word {
