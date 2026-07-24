@@ -32,19 +32,19 @@ export const courses: Course[] = [
   {
     id: "bronze",
     name: "Bronze",
-    tagline: "Ship your first tiny app with Cursor and Claude Code",
+    tagline: "Ship a live personal site with Cursor and Claude Code",
     status: "live",
     estimatedHours: 1.5,
-    win: "A personal site live on the internet, and a clear loop: prompt, edit, run local, deploy.",
+    win: "A live personal site, and the loop: prompt, edit, run, deploy.",
     topics: [
       {
         id: "the-tools",
-        title: "The tools",
-        summary: "What Cursor and Claude Code are, and when to use which.",
+        title: "Tools",
+        summary: "Cursor, Claude Code, chat, and agent.",
         lessons: [
           {
             id: "what-are-ai-coding-tools",
-            title: "What Cursor and Claude Code actually are",
+            title: "Cursor and Claude Code",
             durationMin: 8,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -57,7 +57,7 @@ export const courses: Course[] = [
           },
           {
             id: "chat-vs-agent",
-            title: "Chat vs agent: picking the right mode",
+            title: "Chat vs agent",
             durationMin: 7,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -72,12 +72,12 @@ export const courses: Course[] = [
       },
       {
         id: "first-project",
-        title: "Your first project",
-        summary: "Install, open a folder, and make a tiny change you can see.",
+        title: "First project",
+        summary: "Install, open a folder, make one visible edit.",
         lessons: [
           {
             id: "install-and-open",
-            title: "Install and open your first folder",
+            title: "Install and open a folder",
             durationMin: 9,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -90,7 +90,7 @@ export const courses: Course[] = [
           },
           {
             id: "first-change",
-            title: "Make a tiny change and see it",
+            title: "Make your first edit",
             durationMin: 8,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -105,12 +105,12 @@ export const courses: Course[] = [
       },
       {
         id: "localhost-files",
-        title: "Localhost and files",
-        summary: "What localhost is, which files matter, and how to run locally.",
+        title: "Localhost",
+        summary: "Run on your machine and find the files that matter.",
         lessons: [
           {
             id: "what-is-localhost",
-            title: "What localhost means",
+            title: "Private URLs",
             durationMin: 7,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -123,7 +123,7 @@ export const courses: Course[] = [
           },
           {
             id: "run-locally",
-            title: "Run the app and find the important files",
+            title: "Run the app",
             durationMin: 9,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -138,12 +138,12 @@ export const courses: Course[] = [
       },
       {
         id: "tokens-context",
-        title: "Tokens and context",
-        summary: "Why chat forgets, what tokens are, and how to give better context.",
+        title: "Tokens",
+        summary: "Tokens, context limits, and clearer prompts.",
         lessons: [
           {
             id: "what-are-tokens",
-            title: "What tokens are (without the jargon fog)",
+            title: "Token basics",
             durationMin: 8,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -156,7 +156,7 @@ export const courses: Course[] = [
           },
           {
             id: "better-context",
-            title: "Give better context so the tool stays useful",
+            title: "Better context",
             durationMin: 8,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -172,11 +172,11 @@ export const courses: Course[] = [
       {
         id: "deploy",
         title: "Deploy",
-        summary: "What deploy means, and how to put a simple site on the internet.",
+        summary: "Put a site on a public URL.",
         lessons: [
           {
             id: "what-is-deploy",
-            title: "What deploy means",
+            title: "Going live",
             durationMin: 7,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -189,7 +189,7 @@ export const courses: Course[] = [
           },
           {
             id: "ship-personal-site",
-            title: "Ship a simple personal site",
+            title: "Ship your site",
             durationMin: 10,
             youtubeId: placeholder,
             xp: XP_PER_LESSON,
@@ -207,16 +207,16 @@ export const courses: Course[] = [
   {
     id: "silver",
     name: "Silver",
-    tagline: "Do not get wrecked: auth, secrets, rate limits, RLS",
+    tagline: "Auth, secrets, rate limits, RLS",
     status: "coming_soon",
     estimatedHours: 2,
-    win: "Explain how a small app stays safer without becoming a security engineer.",
+    win: "Keep a small app safer without becoming a security engineer.",
     topics: [],
   },
   {
     id: "gold",
     name: "Gold",
-    tagline: "Get real users for what you built",
+    tagline: "Real users for what you built",
     status: "coming_soon",
     estimatedHours: 2,
     win: "Put something in front of strangers and get a signal.",

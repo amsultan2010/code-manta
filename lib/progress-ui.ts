@@ -18,10 +18,11 @@ export function findResumeLesson(
 ) {
   const next = flat.find((item) => !done.has(item.lessonId));
   if (next) {
+    const started = flat.some((item) => done.has(item.lessonId));
     return {
       href: `/courses/${courseId}/${next.topicId}/${next.lessonId}`,
       title: next.title,
-      label: "Resume learning",
+      label: started ? "Continue" : "Start",
     };
   }
   const last = flat[flat.length - 1];

@@ -6,14 +6,9 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 const nav = [
-  { href: "/dashboard", label: "Courses", group: "My stuff", match: "courses" },
-  {
-    href: "/dashboard#progress",
-    label: "Progress",
-    group: "My account",
-    match: "progress",
-  },
-  { href: "/settings", label: "Settings", group: "My account", match: "settings" },
+  { href: "/dashboard", label: "Courses", match: "courses" },
+  { href: "/dashboard#progress", label: "Progress", match: "progress" },
+  { href: "/settings", label: "Settings", match: "settings" },
 ] as const;
 
 function isNavActive(pathname: string, match: (typeof nav)[number]["match"]) {
@@ -41,12 +36,17 @@ export function PlatformShell({
   const levelNeed = 100;
   const level = Math.floor(xp / levelNeed) + 1;
   const into = xp % levelNeed;
+  const levelPct = Math.round((into / levelNeed) * 100);
 
   return (
     <div className="platform">
       <header className="platform-top">
         <div className="platform-top__inner">
-          <Link href="/" className="brand-mark brand-mark--compact" aria-label="CodeManta home">
+          <Link
+            href="/"
+            className="brand-mark brand-mark--compact"
+            aria-label="CodeManta home"
+          >
             <Image
               src="/brand/manta-mark.png"
               alt=""
@@ -57,30 +57,28 @@ export function PlatformShell({
             <span className="brand-mark__word">CodeManta</span>
           </Link>
 
-          <p className="platform-motivation">
-            Keep going. Small lessons, <strong>real shipping</strong>.
-          </p>
-
           <div className="platform-stats" aria-label="Your progress">
-            <span className="platform-stat">
-              <span className="platform-stat__flame" aria-hidden />
-              {streak} day streak
+            <span className="xp-chip xp-chip--streak" title={`${streak} day streak`}>
+              <span className="xp-chip__icon" aria-hidden />
+              <span className="xp-chip__value">{streak}</span>
+              <span className="xp-chip__label">streak</span>
             </span>
-            <div className="platform-level">
-              <span>Level {level}</span>
+            <div
+              className="xp-level"
+              title={`Level ${level}: ${into} of ${levelNeed} XP`}
+            >
+              <span className="xp-level__label">Lv {level}</span>
               <div
-                className="platform-level__bar"
+                className="xp-level__bar"
                 role="progressbar"
                 aria-valuenow={into}
                 aria-valuemin={0}
                 aria-valuemax={levelNeed}
                 aria-label={`${into} of ${levelNeed} XP to next level`}
               >
-                <span style={{ width: `${(into / levelNeed) * 100}%` }} />
+                <span style={{ width: `${levelPct}%` }} />
               </div>
-              <span className="platform-level__xp">
-                {into} / {levelNeed} XP
-              </span>
+              <span className="xp-level__xp">{into}/{levelNeed}</span>
             </div>
             <UserButton
               appearance={{
@@ -99,7 +97,7 @@ export function PlatformShell({
             <div className="platform-avatar" aria-hidden>
               {(displayName || "C").slice(0, 1).toUpperCase()}
             </div>
-            <div>
+            <div className="platform-profile__meta">
               <p className="platform-profile__name">{displayName || "Learner"}</p>
               <Link href="/settings" className="platform-profile__edit">
                 Edit profile
@@ -108,31 +106,18 @@ export function PlatformShell({
           </div>
 
           <nav className="platform-nav">
-            <p className="platform-nav__group">My stuff</p>
-            {nav
-              .filter((item) => item.group === "My stuff")
-              .map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={isNavActive(pathname, item.match) ? "is-active" : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            <p className="platform-nav__group">My account</p>
-            {nav
-              .filter((item) => item.group === "My account")
-              .map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={isNavActive(pathname, item.match) ? "is-active" : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            <Link href="/">Back to home</Link>
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={isNavActive(pathname, item.match) ? "is-active" : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link href="/" className="platform-nav__home">
+              Home
+            </Link>
           </nav>
         </aside>
 

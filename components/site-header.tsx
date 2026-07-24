@@ -35,8 +35,18 @@ export function SiteHeader({
         <div className="site-header__actions">
           <Show when="signed-in">
             <div className="stat-pills" aria-label="Progress">
-              <span className="stat-pill">{streak ?? 0} day streak</span>
-              <span className="stat-pill">{xp ?? 0} XP</span>
+              <span
+                className="xp-chip xp-chip--streak"
+                title={`${streak ?? 0} day streak`}
+              >
+                <span className="xp-chip__icon" aria-hidden />
+                <span className="xp-chip__value">{streak ?? 0}</span>
+                <span className="xp-chip__label">streak</span>
+              </span>
+              <span className="xp-chip" title={`${xp ?? 0} XP`}>
+                <span className="xp-chip__value">{xp ?? 0}</span>
+                <span className="xp-chip__label">XP</span>
+              </span>
             </div>
             <Link href="/dashboard" className="btn btn-ghost">
               Dashboard

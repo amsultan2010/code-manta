@@ -212,15 +212,6 @@ const endorsements = [
     rolePrefix: "CEO @ ",
     company: { label: "FschoolAI", href: "https://fschoolai.com" },
   },
-  {
-    quote:
-      "The foundational skills taught in CodeManta's curriculum are the exact same principles we use in the real startup world",
-    name: "Christian Zhou-Zheng",
-    avatar: "/brand/reviews/christian-zhou-zheng.png",
-    tone: "sea",
-    brandTone: "foam" as const,
-    role: "Anthropic Fellow '26, Stanford '30",
-  },
 ];
 
 function formatEndorseQuote(quote: string, brandTone: "ink" | "foam" | "coral") {

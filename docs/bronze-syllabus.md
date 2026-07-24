@@ -42,16 +42,16 @@ Bronze is **5 topics**, each with **2 short lessons** (10 lessons total). Lesson
 
 ```
 Bronze
-├── 1. The tools
+├── 1. Tools
 │   ├── what-are-ai-coding-tools
 │   └── chat-vs-agent
-├── 2. Your first project
+├── 2. First project
 │   ├── install-and-open
 │   └── first-change
-├── 3. Localhost and files
+├── 3. Localhost
 │   ├── what-is-localhost
 │   └── run-locally
-├── 4. Tokens and context
+├── 4. Tokens
 │   ├── what-are-tokens
 │   └── better-context
 └── 5. Deploy
@@ -91,10 +91,10 @@ By the end of Bronze, a learner should be able to:
 
 | # | Topic ID | Topic title | Lessons | Video time | XP |
 | --- | --- | --- | ---: | ---: | ---: |
-| 1 | `the-tools` | The tools | 2 | 15 min | 50 |
-| 2 | `first-project` | Your first project | 2 | 17 min | 50 |
-| 3 | `localhost-files` | Localhost and files | 2 | 16 min | 50 |
-| 4 | `tokens-context` | Tokens and context | 2 | 16 min | 50 |
+| 1 | `the-tools` | Tools | 2 | 15 min | 50 |
+| 2 | `first-project` | First project | 2 | 17 min | 50 |
+| 3 | `localhost-files` | Localhost | 2 | 16 min | 50 |
+| 4 | `tokens-context` | Tokens | 2 | 16 min | 50 |
 | 5 | `deploy` | Deploy | 2 | 17 min | 50 |
 | | | **Total** | **10** | **81 min (~1.4 hr)** | **250** |
 
@@ -108,13 +108,13 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-### Topic 1: The tools
+### Topic 1: Tools
 
 **Topic ID:** `the-tools`  
-**Summary:** What Cursor and Claude Code are, and when to use which.  
+**Summary:** Cursor, Claude Code, chat, and agent.  
 **Goal:** Remove mystery. Learners leave knowing these tools sit next to project files, draft and edit under *their* direction, and that chat vs agent is a deliberate choice.
 
-#### Lesson 1.1 - What Cursor and Claude Code actually are
+#### Lesson 1.1 - Cursor and Claude Code
 
 | Field | Value |
 | --- | --- |
@@ -158,7 +158,7 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-#### Lesson 1.2 - Chat vs agent: picking the right mode
+#### Lesson 1.2 - Chat vs agent
 
 | Field | Value |
 | --- | --- |
@@ -202,13 +202,13 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-### Topic 2: Your first project
+### Topic 2: First project
 
 **Topic ID:** `first-project`  
-**Summary:** Install, open a folder, and make a tiny change you can see.  
+**Summary:** Install, open a folder, make one visible edit.  
 **Goal:** Move from theory to a folder on disk and the first visible edit. Shipping is a loop, not a perfect first pass.
 
-#### Lesson 2.1 - Install and open your first folder
+#### Lesson 2.1 - Install and open a folder
 
 | Field | Value |
 | --- | --- |
@@ -253,7 +253,7 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-#### Lesson 2.2 - Make a tiny change and see it
+#### Lesson 2.2 - Make your first edit
 
 | Field | Value |
 | --- | --- |
@@ -298,13 +298,13 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-### Topic 3: Localhost and files
+### Topic 3: Localhost
 
 **Topic ID:** `localhost-files`  
-**Summary:** What localhost is, which files matter, and how to run locally.  
+**Summary:** Run on your machine and find the files that matter.  
 **Goal:** Connect “files on disk” to “site in the browser on my machine,” and know where to look when something fails.
 
-#### Lesson 3.1 - What localhost means
+#### Lesson 3.1 - Private URLs
 
 | Field | Value |
 | --- | --- |
@@ -348,7 +348,7 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-#### Lesson 3.2 - Run the app and find the important files
+#### Lesson 3.2 - Run the app
 
 | Field | Value |
 | --- | --- |
@@ -393,13 +393,13 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-### Topic 4: Tokens and context
+### Topic 4: Tokens
 
 **Topic ID:** `tokens-context`  
-**Summary:** Why chat forgets, what tokens are, and how to give better context.  
+**Summary:** Tokens, context limits, and clearer prompts.  
 **Goal:** Make prompting cheaper and clearer. Less dumping, more pointing; fewer confused long threads.
 
-#### Lesson 4.1 - What tokens are (without the jargon fog)
+#### Lesson 4.1 - Token basics
 
 | Field | Value |
 | --- | --- |
@@ -443,7 +443,7 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-#### Lesson 4.2 - Give better context so the tool stays useful
+#### Lesson 4.2 - Better context
 
 | Field | Value |
 | --- | --- |
@@ -491,10 +491,10 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 ### Topic 5: Deploy
 
 **Topic ID:** `deploy`  
-**Summary:** What deploy means, and how to put a simple site on the internet.  
+**Summary:** Going live, and how to put a simple site on the internet.  
 **Goal:** Cross the finish line: localhost stays for testing; a host makes a URL others can open. Redeploy often.
 
-#### Lesson 5.1 - What deploy means
+#### Lesson 5.1 - Going live
 
 | Field | Value |
 | --- | --- |
@@ -538,7 +538,7 @@ Durations below match `durationMin` in the curriculum (video length estimates). 
 
 ---
 
-#### Lesson 5.2 - Ship a simple personal site
+#### Lesson 5.2 - Ship your site
 
 | Field | Value |
 | --- | --- |
@@ -613,16 +613,16 @@ Same rhythm in every course: short video, notes, XP, streak.
 
 | Order | Topic | Lesson ID | Title | Min | XP | Route |
 | ---: | --- | --- | --- | ---: | ---: | --- |
-| 1 | The tools | `what-are-ai-coding-tools` | What Cursor and Claude Code actually are | 8 | 25 | `/courses/bronze/the-tools/what-are-ai-coding-tools` |
-| 2 | The tools | `chat-vs-agent` | Chat vs agent: picking the right mode | 7 | 25 | `/courses/bronze/the-tools/chat-vs-agent` |
-| 3 | Your first project | `install-and-open` | Install and open your first folder | 9 | 25 | `/courses/bronze/first-project/install-and-open` |
-| 4 | Your first project | `first-change` | Make a tiny change and see it | 8 | 25 | `/courses/bronze/first-project/first-change` |
-| 5 | Localhost and files | `what-is-localhost` | What localhost means | 7 | 25 | `/courses/bronze/localhost-files/what-is-localhost` |
-| 6 | Localhost and files | `run-locally` | Run the app and find the important files | 9 | 25 | `/courses/bronze/localhost-files/run-locally` |
-| 7 | Tokens and context | `what-are-tokens` | What tokens are (without the jargon fog) | 8 | 25 | `/courses/bronze/tokens-context/what-are-tokens` |
-| 8 | Tokens and context | `better-context` | Give better context so the tool stays useful | 8 | 25 | `/courses/bronze/tokens-context/better-context` |
-| 9 | Deploy | `what-is-deploy` | What deploy means | 7 | 25 | `/courses/bronze/deploy/what-is-deploy` |
-| 10 | Deploy | `ship-personal-site` | Ship a simple personal site | 10 | 25 | `/courses/bronze/deploy/ship-personal-site` |
+| 1 | Tools | `what-are-ai-coding-tools` | Cursor and Claude Code | 8 | 25 | `/courses/bronze/the-tools/what-are-ai-coding-tools` |
+| 2 | Tools | `chat-vs-agent` | Chat vs agent | 7 | 25 | `/courses/bronze/the-tools/chat-vs-agent` |
+| 3 | First project | `install-and-open` | Install and open a folder | 9 | 25 | `/courses/bronze/first-project/install-and-open` |
+| 4 | First project | `first-change` | Make your first edit | 8 | 25 | `/courses/bronze/first-project/first-change` |
+| 5 | Localhost | `what-is-localhost` | Private URLs | 7 | 25 | `/courses/bronze/localhost-files/what-is-localhost` |
+| 6 | Localhost | `run-locally` | Run the app | 9 | 25 | `/courses/bronze/localhost-files/run-locally` |
+| 7 | Tokens | `what-are-tokens` | Token basics | 8 | 25 | `/courses/bronze/tokens-context/what-are-tokens` |
+| 8 | Tokens | `better-context` | Better context | 8 | 25 | `/courses/bronze/tokens-context/better-context` |
+| 9 | Deploy | `what-is-deploy` | Going live | 7 | 25 | `/courses/bronze/deploy/what-is-deploy` |
+| 10 | Deploy | `ship-personal-site` | Ship your site | 10 | 25 | `/courses/bronze/deploy/ship-personal-site` |
 
 ---
 
