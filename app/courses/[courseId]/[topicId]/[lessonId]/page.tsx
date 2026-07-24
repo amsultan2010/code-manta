@@ -22,7 +22,7 @@ export default async function LessonPage({
   return (
     <main className="page">
       <p className="page-kicker">
-        <Link href="/dashboard">{course.name}</Link> / {topic.title}
+        <Link href="/courses">{course.name}</Link> / {topic.title}
       </p>
       <h1 className="page-title">{lesson.title}</h1>
       <p className="page-lede">

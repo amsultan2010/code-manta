@@ -29,7 +29,13 @@ export default async function DashboardPage() {
         xp={profile?.xp ?? 0}
         streak={profile?.streak_count ?? 0}
         longestStreak={profile?.longest_streak ?? 0}
-        doneIds={completions.map((c) => c.lesson_id)}
+        lastActivityDate={profile?.last_activity_date ?? null}
+        completions={completions.map((c) => ({
+          lesson_id: c.lesson_id,
+          topic_id: c.topic_id,
+          xp_awarded: c.xp_awarded,
+          completed_at: c.completed_at,
+        }))}
         displayName={displayName}
       />
     </PlatformShell>

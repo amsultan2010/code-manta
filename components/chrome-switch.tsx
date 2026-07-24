@@ -16,7 +16,8 @@ export function ChromeSwitch({
   const isPlatform =
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/settings") ||
-    pathname.startsWith("/courses");
+    pathname.startsWith("/courses") ||
+    pathname.startsWith("/progress");
 
   if (isPlatform) {
     return <>{children}</>;

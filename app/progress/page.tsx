@@ -1,13 +1,13 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { getProgressState } from "@/app/actions/progress";
-import { SettingsPanel } from "@/components/dashboard/settings-panel";
+import { ProgressPanel } from "@/components/dashboard/progress-panel";
 import { PlatformShell } from "@/components/platform/platform-shell";
 
-export default async function SettingsPage() {
+export default async function ProgressPage() {
   const { userId } = await auth();
   if (!userId) {
-    redirect("/sign-in?redirect_url=/settings");
+    redirect("/sign-in?redirect_url=/progress");
   }
 
   const user = await currentUser();
@@ -18,10 +18,6 @@ export default async function SettingsPage() {
     user?.username ||
     user?.primaryEmailAddress?.emailAddress ||
     null;
-  const email =
-    user?.primaryEmailAddress?.emailAddress ||
-    user?.emailAddresses?.[0]?.emailAddress ||
-    null;
 
   return (
     <PlatformShell
@@ -29,14 +25,17 @@ export default async function SettingsPage() {
       streak={profile?.streak_count ?? 0}
       displayName={displayName}
     >
-      <SettingsPanel
-        displayName={displayName}
-        email={email}
+      <ProgressPanel
         xp={profile?.xp ?? 0}
         streak={profile?.streak_count ?? 0}
         longestStreak={profile?.longest_streak ?? 0}
         lastActivityDate={profile?.last_activity_date ?? null}
-        doneCount={completions.length}
+        completions={completions.map((c) => ({
+          lesson_id: c.lesson_id,
+          topic_id: c.topic_id,
+          xp_awarded: c.xp_awarded,
+          completed_at: c.completed_at,
+        }))}
       />
     </PlatformShell>
   );

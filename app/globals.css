@@ -1937,10 +1937,6 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   color: var(--ink-2);
 }
 
-.platform-nav__home {
-  opacity: 0.75;
-}
-
 .platform-main {
   min-width: 0;
 }
@@ -1989,8 +1985,267 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   text-wrap: pretty;
 }
 
-.dash-hero__cta {
+.dash-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
   flex-shrink: 0;
+}
+
+.dash-path__win {
+  margin: -0.35rem 0 1rem;
+  font-size: 1.1rem;
+  color: color-mix(in oklab, var(--ink) 75%, transparent);
+  text-wrap: pretty;
+}
+
+.dash-panels {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.dash-panel {
+  padding: 1.05rem 1.1rem 1.15rem;
+  border-radius: 1rem;
+  border: 1.5px solid var(--line);
+  background: white;
+}
+
+.dash-panel--wide {
+  grid-column: 1 / -1;
+}
+
+.dash-panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.dash-panel__head h2 {
+  margin: 0;
+  font-family: var(--font-display), serif;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+}
+
+.dash-panel__head a {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sea);
+  white-space: nowrap;
+}
+
+.dash-panel__note {
+  margin: 0.85rem 0 0;
+  font-size: 1.05rem;
+  color: color-mix(in oklab, var(--ink) 68%, transparent);
+}
+
+.dash-empty {
+  margin: 0;
+  font-size: 1.1rem;
+  color: color-mix(in oklab, var(--ink) 68%, transparent);
+}
+
+.dash-glance {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.dash-glance__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.dash-glance__row span:last-child {
+  font-family: var(--font-mono), monospace;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.dash-glance__bar {
+  margin-top: 0.35rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ink) 10%, transparent);
+  overflow: hidden;
+}
+
+.dash-glance__bar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--sea), var(--sun));
+}
+
+.dash-activity,
+.dash-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.dash-activity li,
+.dash-history li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.85rem;
+  align-items: baseline;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.75rem;
+  background: color-mix(in oklab, var(--foam) 75%, white);
+  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+}
+
+.dash-activity strong,
+.dash-history strong {
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.dash-activity span,
+.dash-history span {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 1rem;
+  color: color-mix(in oklab, var(--ink) 68%, transparent);
+}
+
+.dash-activity time,
+.dash-history time {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.95rem;
+  opacity: 0.7;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.dash-history a {
+  min-width: 0;
+}
+
+.dash-kv {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.dash-kv > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+}
+
+.dash-kv > div:last-child {
+  border-bottom: 0;
+}
+
+.dash-kv dt {
+  margin: 0;
+  font-size: 1.05rem;
+  color: color-mix(in oklab, var(--ink) 68%, transparent);
+}
+
+.dash-kv dd {
+  margin: 0;
+  font-weight: 700;
+  text-align: right;
+}
+
+.dash-strip__stats--four {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dash-course-cards .btn {
+  margin-top: 0.85rem;
+}
+
+.dash-course-cards__meta {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 1rem;
+  opacity: 0.72;
+}
+
+.dash-soon__card.is-live {
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--sun) 50%, var(--line));
+  background: color-mix(in oklab, var(--sun) 10%, white);
+}
+
+.settings-account {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.settings-account__avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: var(--sea);
+  color: var(--foam);
+  font-family: var(--font-display), serif;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.settings-account__name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.settings-account__email {
+  margin: 0.15rem 0 0;
+  font-size: 1.05rem;
+  color: color-mix(in oklab, var(--ink) 68%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.settings-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.9rem;
+  margin-top: 0.85rem;
+}
+
+.settings-links a {
+  font-weight: 600;
+  color: var(--sea);
+}
+
+.settings-facts {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.55rem;
+  font-size: 1.1rem;
+  color: color-mix(in oklab, var(--ink) 82%, transparent);
+}
+
+.settings-clerk-note {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
+}
+
+.settings-clerk {
+  display: flex;
+  justify-content: center;
 }
 
 .dash-continue {
@@ -2327,14 +2582,21 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   color: color-mix(in oklab, var(--ink) 70%, transparent);
 }
 
-.settings-clerk {
-  display: flex;
-  justify-content: center;
-}
-
 @media (min-width: 720px) {
   .dash-soon__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dash-panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dash-strip__stats--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .dash-course-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -2358,10 +2620,6 @@ html:not([data-landing-phase="ink"]) .hero-diagram__root {
   .platform-nav a {
     border-radius: 0.85rem;
     width: 100%;
-  }
-
-  .platform-nav__home {
-    margin-top: 0.35rem;
   }
 
   .dash {

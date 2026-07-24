@@ -6,18 +6,17 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 const nav = [
-  { href: "/dashboard", label: "Courses", match: "courses" },
-  { href: "/dashboard#progress", label: "Progress", match: "progress" },
+  { href: "/courses", label: "Courses", match: "courses" },
+  { href: "/progress", label: "Progress", match: "progress" },
+  { href: "/dashboard", label: "Dashboard", match: "dashboard" },
   { href: "/settings", label: "Settings", match: "settings" },
 ] as const;
 
 function isNavActive(pathname: string, match: (typeof nav)[number]["match"]) {
-  if (match === "courses") {
-    return pathname === "/dashboard" || pathname.startsWith("/courses/");
-  }
-  if (match === "settings") {
-    return pathname.startsWith("/settings");
-  }
+  if (match === "courses") return pathname.startsWith("/courses");
+  if (match === "progress") return pathname.startsWith("/progress");
+  if (match === "dashboard") return pathname === "/dashboard";
+  if (match === "settings") return pathname.startsWith("/settings");
   return false;
 }
 
@@ -43,9 +42,9 @@ export function PlatformShell({
       <header className="platform-top">
         <div className="platform-top__inner">
           <Link
-            href="/"
+            href="/dashboard"
             className="brand-mark brand-mark--compact"
-            aria-label="CodeManta home"
+            aria-label="CodeManta dashboard"
           >
             <Image
               src="/brand/manta-mark.png"
@@ -115,9 +114,6 @@ export function PlatformShell({
                 {item.label}
               </Link>
             ))}
-            <Link href="/" className="platform-nav__home">
-              Home
-            </Link>
           </nav>
         </aside>
 
