@@ -919,20 +919,14 @@ export function LandingExperience() {
                   <div className="endorse-meta">
                     <strong>{item.name}</strong>
                     <span>
-                      {"company" in item && item.company ? (
-                        <>
-                          {item.rolePrefix}
-                          <a
-                            href={item.company.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {item.company.label}
-                          </a>
-                        </>
-                      ) : (
-                        item.role
-                      )}
+                      {item.rolePrefix}
+                      <a
+                        href={item.company.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.company.label}
+                      </a>
                     </span>
                   </div>
                 </figcaption>
